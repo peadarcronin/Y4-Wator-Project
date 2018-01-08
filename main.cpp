@@ -313,9 +313,12 @@ int main(void) {
     		int previousY = fishArray[i].getY();
     		makeDecision() < 0 ? fishArray[i].moveX(makeDecision()): fishArray[i].moveY(makeDecision());
 
+			// if next position is free, move fish there
     		if (sea[fishArray[i].getX()][fishArray[i].getY()].symbol == water) {
 	        	sea[fishArray[i].getX()][fishArray[i].getY()] = Grid(fish);
+				// increase breed age
 	        	fishArray[i].increaseBreedAge();
+				// when fish can breed, move and add new fish in old position
 	        	if (fishArray[i].canFishBreed()) {
 	        		newFish++;
 	        		fishArray[i].resetBreedAge();
@@ -330,6 +333,7 @@ int main(void) {
 	        	blocked++;
 	        	fishArray[i].setX(previousX);
         		fishArray[i].setY(previousY);
+				// if fish is blocked don't move
 	        	if (blocked < 10) {
 	        		continue;
 	        	}
@@ -342,10 +346,12 @@ int main(void) {
     	for (int i=0; i < numSharks; i++) {
     		int previousX = sharkArray[i].getX();
     		int previousY = sharkArray[i].getY();
+			// if fish is near, move shark there and eat fish
     		if (sharkArray[i].checkNeighbourhood(sea)) {
     			sea[sharkArray[i].getX()][sharkArray[i].getY()] = Grid(shark);
     			removeFishObj(fishArray, sharkArray[i].getX(), sharkArray[i].getY());
     			numFish = fishArray.size();
+				// when shark can breed, move and add new shark in old position
     			if (sharkArray[i].canSharkBreed()) {
     				newShark++;
     				sharkArray[i].resetEnergy();
@@ -358,9 +364,12 @@ int main(void) {
     			}
     		} else {
     			makeDecision() < 0 ? sharkArray[i].moveX(makeDecision()): sharkArray[i].moveY(makeDecision());
+				// move shark to free position
 	    		if (sea[sharkArray[i].getX()][sharkArray[i].getY()].symbol == water) {
 		        	sea[previousX][previousY] = Grid();
+					// increase hunger
 		        	sharkArray[i].gettingHungry();
+					// shark has starved
 		        	if (sharkArray[i].hasStarved()) {
 		        		sharkArray.erase(sharkArray.begin() + i);
 		        		numSharks--;
@@ -371,6 +380,7 @@ int main(void) {
 		        	blocked++;
 		        	sharkArray[i].setX(previousX);
 	        		sharkArray[i].setY(previousY);
+					// if shark is blocked don't move
 	        		if (blocked < 10) {
 	        			sharkArray[i].gettingHungry();
 		        		continue;
