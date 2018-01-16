@@ -6,7 +6,7 @@
 
 using namespace std;
 
-char const water = '.'; //water symbol
+char const water = '~'; //water symbol
 char const fish = 'O'; //fish symbol
 char const shark = 'X'; //shark symbol
 int numFish = 15;
