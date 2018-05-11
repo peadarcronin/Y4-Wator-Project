@@ -11,8 +11,8 @@ char const fish = 'O'; //fish symbol
 char const shark = 'X'; //shark symbol
 int numFish = 15;
 int numSharks = 8;
-int const width = 40;
-int const height = 40;
+int const width = 60;
+int const height = 30;
 
 long int microseconds = 100000; // Timer variable
 
