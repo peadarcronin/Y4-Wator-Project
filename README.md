@@ -26,3 +26,4 @@ This is the serial implementation stage of the project so no benchmarking yet. T
 
 ## License:
 
+GPL-3.0
